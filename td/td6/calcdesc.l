@@ -10,6 +10,7 @@
 "*" { return 301; }
 "/" { return 302; }
 "-" { return 303; }
+"^" { return 304; }
 
 \n { return -1; }
 %%
@@ -17,6 +18,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <math.h>
                              /* les macros sont des blocs : pas de ';' apres */
 #define AVANCER {jeton=yylex();numcar++;printf("jeton=%i\n",jeton);}
 //#define AVANCER {jeton=getchar();numcar++;}
@@ -106,7 +108,17 @@ float F(void){
       }
     else ERREUR_SYNTAXE
 }
-
+float C(float base) {
+  printf("C() \n");
+  if (jeton==304) {
+    float exposant = C(G());
+    return pow(base,exposant);
+  } else { return base; }
+}
+/* TODO
+- Modifier F
+- Modifier G
+ */
 int main(void){                 /* Fonction principale */
   AVANCER			/* initialiser jeton sur le premier car */
   printf("E()=%f\n",E());                         /* axiome */
