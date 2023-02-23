@@ -5,54 +5,86 @@
 %}
 %option noyywrap
 %%
-0|([1-9][0-9]*\.|0\.|\.[0-9])[0-9]* { return 333; } /* Lf */
+[0-9]*|([1-9][0-9]*\.|0\.|\.[0-9])[0-9]* { return 333; } /* Lf */
 "+" { return 300; }
 "*" { return 301; }
+"/" { return 302; }
+"-" { return 303; }
+
+\n { return -1; }
 %%
 /* ZONE DES FONCTIONS C */
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
                              /* les macros sont des blocs : pas de ';' apres */
-#define AVANCER {jeton=yylex();numcar++;}
+#define AVANCER {jeton=yylex();numcar++;printf("jeton=%i\n",jeton);}
 //#define AVANCER {jeton=getchar();numcar++;}
 #define TEST_AVANCE(prevu) {if (jeton==(prevu)) AVANCER else ERREUR_SYNTAXE}
 #define ERREUR_SYNTAXE {printf("\nMot non reconnu : erreur de syntaxe \
 au caractère numéro %d \n",numcar); exit(1);} 
 
-int E(void);int R(int);int T(void);int S(int);float F(void); /* déclars */
+float E(void);float R(float);float T(void);float S(float);float F(void); float C(void); float G(void); /* déclars */
 
 int jeton;                       /* caractère courant du flot d'entrée */
 int numcar=0;                    /* numero du caractère courant (jeton) */
 
-int E(void){
-  int x = T();                          /* regle : E->TR */
+float E(void){
+  printf("E() \n");
+  float x = T();                          /* regle : E->TR */
   return R(x);
 }
-int R(int left){
-  if (jeton=='+') {             /* regle : R->+TR */
+float R(float left){
+  printf("R() \n");
+  printf("On regarde si y a un plus ou un - ? \n");
+  if (jeton==300) {             /* regle : R->+TR */
+    printf("C'est un plus \n");
     AVANCER
-    int x = T();
+    float x = T();
+    printf("total = %f \n", left+x);
     return R(left+x);
+  } else if (jeton==303) {
+    printf("C'est un moins \n");
+    AVANCER
+    float x = T();
+    printf("total = %f \n", left+x);
+    return R(left-x);
   }
-  else return left;                        /* regle : R->epsilon */
+  else {                        /* regle : R->epsilon */
+    printf("Il n'y pas de plus. \n");
+    return left;
+  }
 }
-int T(void){
-  int x = F();
+float T(void){
+  printf("T() \n");
+  float x = F();
+  printf("x = %f \n", x);
   return S(x);                          /* regle : T->FS */
 }
-int S(int left){
-  if (jeton=='*') {             /* regle : S->*FS */
+float S(float left){
+  printf("S(%f) \n", left);
+  printf("On regarde si c'est un * ? \n");
+  if (jeton==301) {             /* regle : S->*FS */
+    printf("J'ai vu un * \n");
     AVANCER
-    int x = F();
+    float x = F();
     return S(left*x);
+  } else if (jeton==302) {
+    printf("J'ai vu un / \n");
+    AVANCER
+    float x = F();
+    return S(left/x);
   }
-  else return left;                        /* regle : S->epsilon */
+  else {
+    printf("C'est pas un *. \n");
+    return left;
+  }                        /* regle : S->epsilon */
 }
 float F(void){
+  printf("F() \n");
   if (jeton=='(') {             /* regle : F->(E) */
     AVANCER
-    int x = E();
+    float x = E();
     TEST_AVANCE(')')
     return x;
   }
@@ -63,24 +95,32 @@ float F(void){
       { 
         printf("C'est un flottant \n");
         int j = jeton; 
-        printf("j=%i \n",j);
-        printf("j=%s \n",yytext);
-        printf("long =%f \n", (float) atol(yytext));
+        printf("text=%s \n",yytext);
+        char* errCheck;
+        // printf("strtol = %f \n",  strtod(yytext, &errCheck));
+        float f = strtod(yytext, &errCheck);
+        printf("long = %f \n",  f);
         AVANCER
-        return (float) atol(yytext);
+        return f;
         // return (j - '0');
       }
     else ERREUR_SYNTAXE
 }
+
 int main(void){                 /* Fonction principale */
   AVANCER			/* initialiser jeton sur le premier car */
-  printf("%d",E());                         /* axiome */
-  if (jeton==EOF)               /* expression reconnue et rien après */
+  printf("E()=%f\n",E());                         /* axiome */
+  if (jeton==-1)               /* expression reconnue et rien après */
     printf("\nMot reconnu\n"); 
-  else ERREUR_SYNTAXE           /* expression reconnue mais il reste des car */
-
+  else {           /* expression reconnue mais il reste des car */
+    printf("Il reste des car. \n");
+    ERREUR_SYNTAXE
+  }
   // int j=yylex();
   // printf("\nJeton : %i; de lexeme %s \n",j,yytext);
 
   return 0;
 }
+
+//tout les mots d'une grammaire ont un arbre de dérivatiton
+// un mot de la grammaire a un arbre de dérivation dont les feuilles sont des character terminaux partant de l'axiome avec des symboles non terminaux(en cours de construction)
