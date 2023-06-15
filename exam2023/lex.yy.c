@@ -363,24 +363,24 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[18] =
+static const flex_int16_t yy_accept[14] =
     {   0,
-        0,    0,    5,    4,    3,    2,    2,    1,    0,    0,
-        1,    0,    0,    1,    1,    1,    0
+        0,    0,    5,    4,    3,    2,    4,    1,    1,    1,
+        1,    1,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
+        1,    1,    1,    1,    1,    1,    1,    1,    2,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    2,    1,    1,    1,    1,    1,    1,    4,    1,
-        1,    5,    5,    1,    1,    1,    5,    6,    6,    6,
-        6,    6,    6,    6,    6,    6,    6,    1,    1,    1,
+        1,    2,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    3,    3,    1,    3,    4,    3,    5,    5,    5,
+        5,    5,    5,    5,    5,    5,    5,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    3,    1,    1,    1,    1,    1,    1,
 
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -401,37 +401,33 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[7] =
+static const YY_CHAR yy_meta[6] =
     {   0,
-        1,    1,    2,    3,    1,    4
+        1,    1,    1,    1,    2
     } ;
 
-static const flex_int16_t yy_base[24] =
+static const flex_int16_t yy_base[16] =
     {   0,
-        0,    0,   19,   20,   20,    0,   20,    3,    0,    0,
-        0,    0,    0,    0,    0,    0,   20,    9,   15,   13,
-       11,    8,    4
+        0,    0,   10,   11,   11,   11,    0,    2,    0,    0,
+        0,    0,   11,    7,    6
     } ;
 
-static const flex_int16_t yy_def[24] =
+static const flex_int16_t yy_def[16] =
     {   0,
-       17,    1,   17,   17,   17,   18,   17,   17,   19,   20,
-        8,   21,   22,   21,   23,   23,    0,   17,   17,   17,
-       17,   17,   17
+       13,    1,   13,   13,   13,   13,   14,   13,   14,   15,
+        8,   15,    0,   13,   13
     } ;
 
-static const flex_int16_t yy_nxt[27] =
+static const flex_int16_t yy_nxt[17] =
     {   0,
-        4,    5,    4,    6,    7,    8,   10,   16,   11,    9,
-       15,    9,    9,   13,   14,   13,   13,   12,   17,    3,
-       17,   17,   17,   17,   17,   17
+        4,    5,    6,    7,    8,   10,   11,   12,    9,   13,
+        3,   13,   13,   13,   13,   13
     } ;
 
-static const flex_int16_t yy_chk[27] =
+static const flex_int16_t yy_chk[17] =
     {   0,
-        1,    1,    1,    1,    1,    1,    8,   23,    8,   18,
-       22,   18,   18,   20,   21,   20,   20,   19,    3,   17,
-       17,   17,   17,   17,   17,   17
+        1,    1,    1,    1,    1,    8,    8,   15,   14,    3,
+       13,   13,   13,   13,   13,   13
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -450,6 +446,7 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "partiePratique.l"
 #line 2 "partiePratique.l"
+#include <math.h>
 /* ZONE DE DEFINITION (OPTIONNELLE) */
 /* ZONE DES REGLES apres le double pourcent (OBLIGATOIRE) */
  //"/*"([^*]|\**[^*/])*\*+\/ { return 349; } 
@@ -460,8 +457,8 @@ union {
     float f;
     char c;
 } yyval;
-#line 464 "lex.yy.c"
-#line 465 "lex.yy.c"
+#line 461 "lex.yy.c"
+#line 462 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -678,9 +675,9 @@ YY_DECL
 		}
 
 	{
-#line 14 "partiePratique.l"
+#line 15 "partiePratique.l"
 
-#line 684 "lex.yy.c"
+#line 681 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -707,13 +704,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 18 )
+				if ( yy_current_state >= 14 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 20 );
+		while ( yy_base[yy_current_state] != 11 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -739,25 +736,25 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 15 "partiePratique.l"
-{ yyval.f=atoi(yytext); printf("    yyval.f=%f\n",yyval.f); return LITF; } // exemple 111  .111    111.
+#line 16 "partiePratique.l"
+{ yyval.f=atof(yytext); /* printf("    yyval.f=%f\n",yyval.f); */ return LITF; } // exemple 111  .111    111.
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 16 "partiePratique.l"
-{ yyval.c=yytext; printf("   yyval.c=%s, taille=%i\n", yytext, sizeof(yytext));  return OP; }
+#line 17 "partiePratique.l"
+{ /* printf("%s     %c\n",yytext, yyval.c); */ yyval.c=yytext; printf("%s     %c\n",yytext, yyval.c); return OP; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 17 "partiePratique.l"
-
+#line 18 "partiePratique.l"
+{}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 18 "partiePratique.l"
+#line 19 "partiePratique.l"
 ECHO;
 	YY_BREAK
-#line 761 "lex.yy.c"
+#line 758 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1054,7 +1051,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 18 )
+			if ( yy_current_state >= 14 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1082,11 +1079,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 18 )
+		if ( yy_current_state >= 14 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 17);
+	yy_is_jam = (yy_current_state == 13);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1762,16 +1759,17 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 18 "partiePratique.l"
+#line 19 "partiePratique.l"
 
 /* ZONE DES FONCTIONS C */
 
-int jeton; float sexp(float); float eexp();
+int jeton; float sexp(float); float eexp(); float customPow(float, float);
 
-#define AVANCER {jeton=yylex(); printf("...yytext=%s\n", yytext);}
+#define AVANCER {jeton=yylex(); printf("AVANCER    yytext=%s\n", yytext);}
 #define ERREUR_SYNTAXE {printf("\nMot non reconnu : erreur de syntaxe"); exit(1);} 
 
 float eexp() {
+    printf("eexp()\n");
     if (jeton == LITF) {
         float gauche = yyval.f;
         AVANCER
@@ -1780,28 +1778,45 @@ float eexp() {
         ERREUR_SYNTAXE
     }
 }
-
+int n = 0;
 float sexp(float f) {
+    n++;
     printf("sexp(%f)\n", f);
     if (jeton == LITF) {
-        // printf("reconnaisance second LITF\n");
-        float droite = eexp();//yyval.f;
-
-        printf("yyval.c = %c\n", yyval.c);
-        AVANCER
-        if (jeton != OP) {ERREUR_SYNTAXE}
-        printf("reconnaisance jeton OP\n");
-        printf("yyval.c = %c\n", yyval.c);
-        if (yytext == "+") {
-            float result;
-            result = f+yyval.f;
-            printf("result = %f\n", result);
-            return sexp(f+yyval.f);
+        printf("ici\n");
+        float droite = eexp();
+        if (jeton != OP) {printf("oof %f %f\n", f, droite);ERREUR_SYNTAXE}
+        float result;
+        if (strcmp(yytext,"*")==0) {
+            result = f*droite;
+            printf("result : %f + %f = %f\n",f,droite, result);
+        } else if (strcmp(yytext,"+")==0) {
+            result = f+droite;
+            printf("result : %f + %f = %f\n",f,droite, result);
+        } else if (strcmp(yytext,"-")==0) {
+            result = f-droite;
+            printf("result : %f + %f = %f\n",f,droite, result);
+        } else if (strcmp(yytext,"/")==0) {
+            result = f/droite;
+            printf("result : %f + %f = %f\n",f,droite, result);
+        }  else if (strcmp(yytext,"^")==0) {
+            result = customPow(f,droite); //f/droite;
+            printf("result : %f ^ %f = %f\n",f,droite, result);
         }
+        AVANCER
+        return sexp(result);
     } else {
+        printf("là %f\n", f);
         return f;
     }
 }
+
+float customPow(float f, float n) {
+    if (n > 0) {
+        return customPow(f,n-1)*f;
+    } return 1;
+}
+
 int main()
 {
     int j; 
